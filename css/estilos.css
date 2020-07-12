@@ -1,0 +1,23 @@
+.navbar { 
+	padding-top: 0.3rem;
+	padding-right: 1rem;
+	padding-bottom: 0.5rem;
+	padding-left: 1rem;
+}
+
+.info-datos li a {
+	padding: 0;
+	font-size: 0.7rem;
+	letter-spacing: 0.1rem
+}
+
+.navbar .info-datos .nav-item .nav-link { color: #C4C6C8; }
+
+.menu-sb { font-size: 0.9rem; }
+
+.form-control {
+	border: none;
+	border-bottom: 1px dotted #AAA;
+}
+
+.table, th { font-weight: normal; }
