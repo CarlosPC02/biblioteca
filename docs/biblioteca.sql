@@ -28,8 +28,10 @@ CREATE TABLE IF NOT EXISTS ejemplar_has_usuario(fecha_prestamo DATE NOT NULL, fe
     PRIMARY KEY(idEjemplar, idUsuario));
     
 INSERT INTO libro(titulo,isbn,editorial,numero_paginas) VALUES('Cambiemos el mundo',734079,'Lamen',100);
-INSERT INTO usuario(nombre,direccion,telefono) VALUES('Daniel Gomez','Av. Portales #2332',223173394);
-SELECT * FROM libro;
 
-SELECT u.nombre, u.telefono, l.titulo, l.isbn, l.editorial, l.numero_paginas
-FROM biblioteca.libro l, biblioteca.usuario u;
+INSERT INTO usuario(nombre,direccion,telefono) VALUES('Daniel Gomez','Av. Portales #2332',223173394);
+
+SELECT l.idLibro, l.titulo, l.isbn, l.editorial, l.numero_paginas
+FROM biblioteca.libro l;
+SELECT * FROM usuario;
+SELECT * FROM libro;

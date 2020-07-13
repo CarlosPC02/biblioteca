@@ -15,9 +15,21 @@
 
 .menu-sb { font-size: 0.9rem; }
 
-.form-control {
-	border: none;
-	border-bottom: 1px dotted #AAA;
+.table, th { font-weight: normal; }
+
+.alert {
+	/*background: #860000;
+	color: #FFF;*/
+	padding-top: 0.3rem;
+	padding-right: 1rem;
+	padding-bottom: 0.5rem;
+	padding-left: 1rem;
 }
 
-.table, th { font-weight: normal; }
+.alert .texto-sb { font-size: 0.8rem; }
+
+.btn-cerrar { 
+	padding: 0.30rem 1rem !important;
+	line-height: 20px;
+	color: #000 !important;
+}
