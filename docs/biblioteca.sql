@@ -1,37 +1,39 @@
 CREATE DATABASE biblioteca;
 USE biblioteca;
 
-CREATE TABLE IF NOT EXISTS ficha_autor(idficha_autor INT AUTO_INCREMENT, nombre VARCHAR(45) NOT NULL,
-	PRIMARY KEY(idficha_autor));
+CREATE TABLE IF NOT EXISTS autor (
+	idautor INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+);
 
-CREATE TABLE IF NOT EXISTS libro(idLibro INT AUTO_INCREMENT, titulo VARCHAR(45) NOT NULL, isbn INTEGER NOT NULL,
-	editorial VARCHAR(50) NOT NULL, numero_paginas INTEGER NOT NULL,
-    PRIMARY KEY(idLibro));
-    
-CREATE TABLE IF NOT EXISTS usuario(idUsuario INT AUTO_INCREMENT, nombre VARCHAR(30) NOT NULL, direccion VARCHAR(45) NOT NULL,
-	telefono INTEGER NOT NULL,
-    PRIMARY KEY(idUsuario));
-    
-CREATE TABLE IF NOT EXISTS ejemplar(idEjemplar INT AUTO_INCREMENT, localizacion VARCHAR(100) NOT NULL, idLibro INT NOT NULL,
-	CONSTRAINT fk_idLibro FOREIGN KEY(idLibro) REFERENCES libro(idLibro),
-    PRIMARY KEY(idEjemplar));
+CREATE TABLE IF NOT EXISTS libro (
+	idlibro INT AUTO_INCREMENT PRIMARY KEY,
+    isbn INT UNIQUE NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    leyenda VARCHAR(100),
+    descripcion VARCHAR(255) NOT NULL,
+    cantidad_bodega INT NOT NULL,
+    num_paginas INT NOT NULL,
+    idautor INT,
+    precio INT,
+    CONSTRAINT fk_idautor FOREIGN KEY(idautor) REFERENCES autor(idautor)
+);
 
-CREATE TABLE IF NOT EXISTS ficha_autor_has_libro(idficha_autor INTEGER NOT NULL, idLibro INTEGER NOT NULL,
-	CONSTRAINT fk2_idLibro FOREIGN KEY(idLibro) REFERENCES libro(idLibro),
-    CONSTRAINT fk_idficha_autor FOREIGN KEY(idficha_autor) REFERENCES ficha_autor(idficha_autor),
-    PRIMARY KEY(idficha_autor, idLibro));
+-- Datos temporales de ejemplo
+INSERT INTO biblioteca.autor(nombre)
+	VALUES('Julian Melgosa y Michelson Borges'),('Alba Rosa Pastora Olivares'),('Isha'),('Ediciones Paulinas Verbo Divino');
+SELECT a.idautor AS "#", a.nombre FROM biblioteca.autor a;
 
-CREATE TABLE IF NOT EXISTS ejemplar_has_usuario(fecha_prestamo DATE NOT NULL, fecha_devolucion DATE NOT NULL,
-	idEjemplar INTEGER NOT NULL, idUsuario INTEGER NOT NULL,
-    CONSTRAINT fk_idUsuario FOREIGN KEY(idUsuario) REFERENCES usuario(idUsuario),
-    CONSTRAINT fk_idEjemplar FOREIGN KEY(idEjemplar) REFERENCES ejemplar(idEjemplar),
-    PRIMARY KEY(idEjemplar, idUsuario));
-    
-INSERT INTO libro(titulo,isbn,editorial,numero_paginas) VALUES('Cambiemos el mundo',734079,'Lamen',100);
+INSERT INTO biblioteca.libro(isbn, nombre, leyenda, descripcion, cantidad_bodega, num_paginas, idautor, precio)
+	VALUES (10502,'El poder de la esperanza','Secretos del bienestar emocional','Practicar ejercicio fisico y tener...',20,96,1,5200);
+INSERT INTO biblioteca.libro(isbn, nombre, leyenda, descripcion, cantidad_bodega, num_paginas, idautor, precio)
+	VALUES (2015,'Camino al exito','Demoliendo mis zonas estrechos','Muchas veces no preocupamos de...',100,80,2,2380);
+INSERT INTO biblioteca.libro(isbn, nombre, leyenda, descripcion, cantidad_bodega, num_paginas, idautor, precio)
+	VALUES (978956,'Sobre las nubes','El sol esta siempre brillando...','La vida es una oferta increible...',5,173,3,1000);
+INSERT INTO biblioteca.libro(isbn, nombre, leyenda, descripcion, cantidad_bodega, num_paginas, idautor, precio)
+	VALUES (777,'La Biblia','!Jesucristo ha resucitado¡','La historia de Dios',10,388,4,8760);
 
-INSERT INTO usuario(nombre,direccion,telefono) VALUES('Daniel Gomez','Av. Portales #2332',223173394);
-
-SELECT l.idLibro, l.titulo, l.isbn, l.editorial, l.numero_paginas
-FROM biblioteca.libro l;
-SELECT * FROM usuario;
-SELECT * FROM libro;
+SELECT l.idlibro AS "#", l.isbn, l.nombre AS "titulo", l.leyenda, l.descripcion, l.cantidad_bodega AS "stock", 
+	l.num_paginas AS "paginas", a.nombre AS "author", l.precio
+FROM biblioteca.libro l
+INNER JOIN biblioteca.autor a ON l.idautor = a.idautor;
