@@ -5,6 +5,6 @@
 [WampServer](https://www.wampserver.com/en/), en estos Software viene incluido el PHP y MySQL
 
 ## Imagen Inicial del sistema
-![Imagen prinicipal](https://user-images.githubusercontent.com/51731637/103141729-42596580-46d7-11eb-8aad-f668ade7c0c8.PNG)
+![Imagen prinicipal](https://user-images.githubusercontent.com/51731637/103143736-53b46900-46fb-11eb-9df3-795ccb3e0b00.PNG)
 
 
