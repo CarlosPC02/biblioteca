@@ -22,7 +22,7 @@ function UpdateLibro($conex, $datos) {
 	$query.= "nombre='".strtoupper($datos['titulo'])."', cantidad_bodega=".$datos['stock'].", ";
 	$query.= "idautor=".$datos['author'].", precio=".$datos['precio']." ";
 	$query.= "WHERE isbn=".$datos['isbn']." ";
-	// error_log($query);
+	error_log($query);
 
 	$row = mysqli_query($conex, $query);
 	if (!$row) {
