@@ -6,7 +6,7 @@ $sql = "SELECT l.isbn, l.nombre AS 'titulo', l.cantidad_bodega, a.nombre AS 'aut
 $sql .= "FROM biblioteca.libro l ";
 $sql .= "INNER JOIN biblioteca.autor a ON l.idautor = a.idautor ";
 $sql .= "WHERE l.isbn = " . $id . " ";
-error_log($sql);
+// error_log($sql);
 
 $result = mysqli_query($conex, $sql);
 $fila = mysqli_fetch_array($result);
@@ -32,8 +32,8 @@ $fila = mysqli_fetch_array($result);
             <div class="row">
                 <div class="col-md-12">
                     <span id="msg"></span>
-                    <h5>Editar Libro</h5>
                     <div class="card card-body">
+                        <h2 class="text-center h4 font-weigth-normal">Editar registro</h5>
                         <div>
                             <div class="form-group">
                                 <label for="txtIndentificador">Identificador (ISBN):</label>
@@ -79,12 +79,12 @@ $fila = mysqli_fetch_array($result);
                             </div>
                             <div class="form-group">
                                 <label for="txtPrecio">Valor del Libro:</label>
-                                <input type="text" name="inpPrecio" id="txtPrecio" value="$<?php echo $fila['precio']; ?>.-" class="form-control form-control-sm">
+                                <input type="text" name="inpPrecio" id="txtPrecio" value="<?php echo $fila['precio']; ?>" class="form-control form-control-sm">
                             </div>
 
                             <div class="form-group">
                                 <div class="col-md-12 ">
-                                    <button type="button" class="btn btn-primary btn-block btn-sm" id="btnSaved">
+                                    <button type="button" class="btn btn-primary btn-block btn-sm" onclick="UpdateRegister();">
                                         <i class="fa fa-refresh fa-pulse" aria-hidden="true"></i>&nbsp;Actualizar
                                     </button>
                                     <a href="./" class="btn btn-danger btn-block btn-sm">
@@ -101,6 +101,44 @@ $fila = mysqli_fetch_array($result);
 
     <script src="resource/bootstrap/jquery-3.5.1.slim.js"></script>
     <script src="resource/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript">
+        
+        function UpdateRegister() {
+            let vObject, vData;
+
+            let isbn = document.getElementById("txtIndentificador").value.trim();
+            let titulo = document.getElementById("txtTitulo").value.trim();
+            let stock = document.getElementById("txtStock").value.trim();
+            let author = document.getElementById("txtAuthor").value;
+            let precio = document.getElementById("txtPrecio").value.trim();
+            let sms = document.getElementById("msg");
+
+            // console.info(`- ISBN: ${isbn} \n- TITUTLO: ${titulo}`);
+
+            if(window.XMLHttpRequest) {
+                vObject = new XMLHttpRequest();
+            } else {
+                vObject = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            
+            vObject.onreadystatechange = () => {
+                if (vObject.readyState == 4 && vObject.status == 200) {
+                    var messages = vObject.responseText;
+                    sms.innerHTML = messages;
+                }
+            }
+            vObject.open("POST", "ajax_sistemadebiblioteca.php", true);
+            vObject.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            vData = "accion=update";
+            vData += '&i=' + isbn;
+            vData += '&t=' + titulo;
+            vData += '&s=' + stock;
+            vData += '&au=' + author;
+            vData += '&p=' + precio;
+
+            vObject.send(vData);
+        }
+    </script>
 </body>
 
 </html>

@@ -7,7 +7,7 @@ if (isset($_POST['accion'])) {
 	if (isset($accion)) {
 
 		// Guardar un regitro
-		if ($accion = "saved") {
+		if ($accion === "saved") {
 			$answer = false;
 
 			$datos['isbn'] = mysqli_real_escape_string($conex, trim($_POST['i']));
@@ -86,7 +86,32 @@ if (isset($_POST['accion'])) {
 
 
 		// Editar un registro
-		// if ($accion = "")
+		if ($accion === "update") {
+			$answer = false;
+
+			$datos['isbn'] = mysqli_real_escape_string($conex, trim($_POST['i']));
+			$datos['titulo'] = mysqli_real_escape_string($conex, trim($_POST['t']));
+			$datos['stock'] = mysqli_real_escape_string($conex, trim($_POST['s']));
+			$datos['author'] = mysqli_real_escape_string($conex, trim($_POST['au']));
+			$datos['precio'] = mysqli_real_escape_string($conex, trim($_POST['p']));
+
+			$answer = UpdateLibro($conex, $datos);
+			if ($answer) {
+				echo $msg = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+						<strong class="texto-sb">Actualizacion exitosa! </strong>
+						<button type="button" class="close btn-cerrar" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>';
+			} else {
+				echo $msg = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+						<strong class="texto-sb">!!Error no se puedo actualizar los datos! </strong>
+						<button type="button" class="close btn-cerrar" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>';
+			}
+		}
 
 	}
 }

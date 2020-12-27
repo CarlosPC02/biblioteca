@@ -86,7 +86,7 @@ $query = mysqli_query($conex, $sql);
 											<i class=" fa fa-edit" aria-hidden="true"></i>
 										</a>
 									</td>
-									<td>
+									<td class="text-center">
 										<a href="#" title="Eliminar">
 											<i class="fa fa-trash" aria-hidden="true"></i>
 										</a>
