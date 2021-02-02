@@ -87,7 +87,7 @@ $query = mysqli_query($conex, $sql);
 										</a>
 									</td>
 									<td class="text-center">
-										<a href="#" title="Eliminar">
+										<a href="eliminar.php?isbn=<?php echo $row['isbn']; ?>" title="Eliminar">
 											<i class="fa fa-trash" aria-hidden="true"></i>
 										</a>
 									</td>
