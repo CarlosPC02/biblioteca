@@ -113,5 +113,30 @@ if (isset($_POST['accion'])) {
 			}
 		}
 
+
+		// Eliminar un registro
+		if ($accion === "delete") {
+			$answer = false;
+
+			$datos['isbn'] = mysqli_real_escape_string($conex, trim($_POST['i']));
+
+			$answer = DeleteLibro($conex, $datos);
+			if ($answer) {
+				echo $msg = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+						<strong class="texto-sb">Se elimino el registro </strong>
+						<button type="button" class="close btn-cerrar" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>';
+			} else {
+				echo $msg = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+						<strong class="texto-sb">!!Error no se pudo eliminar el registro </strong>
+						<button type="button" class="close btn-cerrar" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>';
+			}
+		}
+
 	}
 }
