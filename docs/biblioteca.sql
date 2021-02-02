@@ -45,4 +45,6 @@ SELECT l.idlibro AS "#", l.isbn, l.nombre AS "titulo", l.leyenda, l.descripcion,
 FROM biblioteca.libro l
 INNER JOIN biblioteca.autor a ON l.idautor = a.idautor;
 
-SELECT l.isbn, l.nombre AS 'titulo', l.cantidad_bodega, a.nombre AS 'author', l.precio FROM biblioteca.libro l  INNER JOIN biblioteca.autor a ON l.idautor = a.idautor WHERE l.isbn = 978956
+SELECT l.isbn, l.nombre AS 'titulo', l.cantidad_bodega, a.nombre AS 'author', l.precio 
+FROM biblioteca.libro l  
+INNER JOIN biblioteca.autor a ON l.idautor = a.idautor WHERE l.isbn = 978956
