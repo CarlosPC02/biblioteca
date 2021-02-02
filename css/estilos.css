@@ -21,9 +21,11 @@
 	/*background: #860000;
 	color: #FFF;*/
 	padding-top: 0.3rem;
-	padding-right: 1rem;
+	/*padding-right: 1rem;*/
 	padding-bottom: 0.5rem;
-	padding-left: 1rem;
+	/*padding-left: 1rem;*/
+	width: 20rem;
+	margin: auto;
 }
 
 .alert .texto-sb { font-size: 0.8rem; }
