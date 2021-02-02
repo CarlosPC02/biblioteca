@@ -22,7 +22,29 @@ function UpdateLibro($conex, $datos) {
 	$query.= "nombre='".strtoupper($datos['titulo'])."', cantidad_bodega=".$datos['stock'].", ";
 	$query.= "idautor=".$datos['author'].", precio=".$datos['precio']." ";
 	$query.= "WHERE isbn=".$datos['isbn']." ";
-	error_log($query);
+	// error_log($query);
+
+	$row = mysqli_query($conex, $query);
+	if (!$row) {
+	} else {
+		if (mysqli_affected_rows($conex)) {
+			$answer = true;
+		} 
+	} 
+
+	return $answer;
+	mysqli_close($conex);
+}
+
+
+function DeleteLibro($conex, $datos) {
+	$answer = false;
+
+	$query = "DELETE ";
+	$query.= "FROM biblioteca.libro l ";
+	$query.= "WHERE l.isbn=".$datos['isbn']." ";
+	// error_log("SQL SCRIPTS: " . $query);
+
 
 	$row = mysqli_query($conex, $query);
 	if (!$row) {
